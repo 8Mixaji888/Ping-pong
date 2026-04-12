@@ -59,6 +59,10 @@ while not end_game:
 
     if not finish:
         mw.fill((200, 255, 255))
+        player1.go1()
+        player1.reset()
+        player2.go2()
+        player2.reset()
 
     clock.tick(60)
     display.update()            
