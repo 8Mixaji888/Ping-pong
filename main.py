@@ -73,5 +73,16 @@ while not end_game:
         if ball.rect.y >= mwHigth-40 or ball.rect.y <= 0:
             speedy *= -1
 
+        if ball.rect.x <=0:
+            mw.fill((0,255,0))
+            win_txt1 = font.SysFont(None, 40).render('Player 2 win', True, (0,0,0))
+            mw.blit(win_txt1, (250, 250))
+            finish = True
+        if ball.rect.x >= mwWidth:
+            mw.fill((0,255,0))
+            win_txt2 = font.SysFont(None, 40).render('Player 1 win', True, (0,0,0))
+            mw.blit(win_txt2, (250, 250))
+            finish = True
+
     clock.tick(60)
     display.update()            
