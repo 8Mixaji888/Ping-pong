@@ -7,6 +7,8 @@ font.init()
 clock = time.Clock()
 mwWidth = 700
 mwHigth = 500
+speedx = 3
+speedy = 3
 
 end_game = False
 finish = False
@@ -38,19 +40,19 @@ class Player(GameSprite):
         keys = key.get_pressed()
         if keys[K_UP] and self.rect.y > 0:
             self.rect.y -= self.speed
-        if keys[K_DOWN] and self.rect.y < mwWidth-75:
+        if keys[K_DOWN] and self.rect.y < mwHigth-75:
             self.rect.y += self.speed
 
     def go2(self):
         keys = key.get_pressed()
         if keys[K_w] and self.rect.y > 0:
             self.rect.y -= self.speed
-        if keys[K_s] and self.rect.y < mwWidth-75:
+        if keys[K_s] and self.rect.y < mwHigth-75:
             self.rect.y += self.speed
 
 player1 = Player('racket.png', 0, 213, 5)
 player2 = Player('racket.png', 680, 213, 5)
-ball = GameSprite('tenis_ball.png', 330, 230, 2, 40, 40)
+ball = GameSprite('tenis_ball.png', 330, 230, 3, 40, 40)
 
 while not end_game:
     for e in event.get():
@@ -63,6 +65,13 @@ while not end_game:
         player1.reset()
         player2.go2()
         player2.reset()
+        ball.reset()
+        ball.rect.x += speedx
+        ball.rect.y += speedy
+        if sprite.collide_rect(player1, ball) or sprite.collide_rect(player2, ball):
+            speedx *= -1
+        if ball.rect.y >= mwHigth-40 or ball.rect.y <= 0:
+            speedy *= -1
 
     clock.tick(60)
     display.update()            
